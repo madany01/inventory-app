@@ -1,0 +1,290 @@
+@import 'reset';
+@import 'colors';
+@import 'general';
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+body {
+  background-color: #111827;
+  color: $color-white;
+  font-family: 'Inter', sans-serif;
+
+  display: flex;
+  flex-direction: column;
+
+  & > main {
+    flex-grow: 1;
+  }
+}
+
+.main-header {
+  padding: 1.2rem 2.4rem;
+
+  background-color: $main-header-bg-color;
+
+  text-transform: capitalize;
+
+  margin-bottom: 4rem;
+
+  border-bottom: 1px solid $main-header-border-color;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  h1 {
+    font-size: 1.8rem;
+    font-weight: 500;
+    color: $main-header-color;
+  }
+
+  @media (max-width: calc(540/ 16 * 1rem)) {
+    flex-direction: column;
+    gap: 3.6rem;
+    align-items: flex-start;
+
+    *:nth-child(2) {
+      align-self: flex-end;
+    }
+  }
+}
+
+.home-page {
+  // extension
+  .view-all-extensions {
+    width: max-content;
+    display: block;
+    margin-inline-start: auto;
+  }
+
+  // categories
+
+  .category-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.4rem;
+    align-items: center;
+    margin-bottom: 2.4rem;
+  }
+
+  .category-list .category {
+    padding: 1.2rem 4.8rem;
+    border-radius: 1.2rem;
+    background-color: transparent;
+    border: 0.1rem solid currentColor;
+    color: $color-grey;
+    font-size: 1.6rem;
+    font-weight: 600;
+    transition: all 0.3s;
+  }
+
+  .category-list .category:hover {
+    color: $color-orange;
+  }
+
+  .view-all-categories {
+    display: block;
+    width: max-content;
+    margin-inline-start: auto;
+  }
+}
+
+.category-page {
+  .category-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
+  }
+
+  .category-record {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .category-record::before {
+    content: '🔷';
+  }
+
+  .category {
+    font-size: 1.8rem;
+    font-weight: 500;
+    color: $color-white;
+  }
+
+  .category-extensions {
+    color: $color-grey;
+    font-size: 1.1rem;
+    font-weight: 600;
+  }
+  .edit-category {
+    color: $color-warning;
+  }
+
+  .delete-category {
+    color: $color-danger;
+  }
+}
+
+.extension-detail-page {
+  .extension-card-detail {
+    padding: 2rem;
+
+    border-radius: 0.8rem;
+
+    display: grid;
+    grid-template-columns: repeat(4, auto);
+    grid-template-rows: auto auto auto 3.4rem auto;
+    align-items: center;
+    justify-content: start;
+    gap: 0.8rem 1.8rem;
+    grid-template-areas:
+      'img title title .'
+      'img category category .'
+      'img downloads stars  .'
+      '. . . . '
+      'description description description description';
+
+    overflow: hidden;
+    margin-bottom: 3.2rem;
+
+    .img {
+      grid-area: img;
+
+      height: 8rem;
+      width: 8rem;
+      justify-self: center;
+    }
+
+    .title {
+      grid-area: title;
+
+      font-size: 1.8rem;
+      font-weight: 500;
+      color: $color-white;
+    }
+
+    .category,
+    .downloads {
+      font-size: 1.4rem;
+      font-weight: 500;
+      color: $color-grey;
+    }
+
+    .category {
+      grid-area: category;
+
+      font-size: 1.6rem;
+      font-weight: 500;
+      color: $color-grey-dark-1;
+    }
+
+    .downloads {
+      grid-area: downloads;
+
+      display: flex;
+      align-items: center;
+    }
+    .stars {
+      grid-area: stars;
+
+      display: flex;
+      gap: 0.2rem;
+
+      font-weight: 300;
+
+      .star-icon {
+        font-size: 2rem;
+        color: $color-grey;
+      }
+
+      .star-icon.filled {
+        color: $color-orange;
+      }
+    }
+
+    .description {
+      grid-area: description;
+
+      font-size: 1.6rem;
+      color: $color-white;
+      line-height: 1.5;
+    }
+  }
+  .actions-btns {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+
+    .btn {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+  }
+
+  @media (max-width: calc(390rem/16)) {
+    .extension-card-detail {
+      grid-template-columns: repeat(2, auto);
+      grid-template-rows: auto auto auto 3.4rem auto;
+      grid-template-areas:
+        'img img'
+        'title title'
+        'category category'
+        'downloads stars'
+        '. .'
+        'description description';
+
+      .category {
+        margin-bottom: 1.6rem;
+      }
+    }
+
+    .actions-btns {
+      flex-direction: column;
+      align-items: flex-end;
+    }
+  }
+}
+
+.delete-confirmation-section {
+  .confirmation {
+    color: $color-white;
+    font-size: 1.8rem;
+    margin-bottom: 3.2rem;
+
+    .deleted-item {
+      font-weight: 500;
+      font-style: italic;
+      color: $color-tomato;
+    }
+  }
+}
+
+.server-err-section {
+  color: $color-white;
+
+  .msg {
+    font-size: 2.4rem;
+    font-weight: 600;
+    margin-bottom: 1.6rem;
+    color: $color-orange;
+  }
+
+  .status {
+    font-size: 2rem;
+    font-weight: 500;
+    margin-bottom: 3.2rem;
+  }
+
+  hr {
+    height: 0.1rem;
+    background-color: $color-grey-dark-2;
+  }
+
+  .stack {
+    margin-top: 2.4rem;
+    font-size: 1.6rem;
+    line-height: 1.8;
+  }
+}

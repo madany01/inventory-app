@@ -1,0 +1,14 @@
+<section class="server-err-section">
+  <div class="ctr">
+    <h1 class="msg">
+      <pre>
+        <%= locals.serverError?.message %>
+      </pre>
+    </h1>
+    <h2 class="status">status: <%= locals.serverError?.status || 500 %></h2>
+    <hr />
+    <% if (locals.serverError?.stack) { %>
+    <pre class="stack">stack: <%= locals.serverError?.stack %></pre>
+    <% } %>
+  </div>
+</section>
