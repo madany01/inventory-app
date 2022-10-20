@@ -1,0 +1,12 @@
+<a class="extension-card-preview" href="<%= extension.url %>">
+  <img src="<%= extension.imgUrl %>" alt="" class="img" />
+  <div class="title"><%= extension.name %></div>
+  <div class="category">
+    <%= extension.category.name %>
+  </div>
+  <div class="downloads">
+    <span class="material-symbols-outlined">download</span>
+    <span class="number"><%= ejsutils.formateNumber(extension.downloads) %></span>
+  </div>
+  <%- include('./_extension-stars') %>
+</a>

@@ -5,16 +5,19 @@ const path = require('path')
 
 const log = require('debug')(`${conf.APP_NAME}:server`)
 const express = require('express')
+const httpError = require('http-errors')
 const morgan = require('morgan')
 const expressLayouts = require('express-ejs-layouts')
+
 const cookieParser = require('cookie-parser')
-const csrf = require('csurf')
 const session = require('express-session')
 const flash = require('connect-flash')
+
 const mongoose = require('mongoose')
 const MongoStore = require('connect-mongo')
 
-const { sessionPopper } = require('./utils')
+const { homeRoute, categoryRoute, extensionRoute } = require('./routes')
+const { csrfProtect, sessionPopper, viewUtils } = require('./core')
 
 // ______________________________ app ______________________________
 
@@ -30,12 +33,30 @@ app.use((req, res, next) => {
 // ______________________________ templates ______________________________
 
 app.set('views', path.join(__dirname, 'views'))
+if (conf.DEVELOPMENT_ENV) app.disable('view cache')
 
 app.use(expressLayouts)
 app.set('layout', './layouts/base')
 app.set('view engine', 'ejs')
-if (conf.DEVELOPMENT_ENV) app.disable('view cache')
 
+// app.set('view engine', 'hbs')
+// app.engine(
+//   'hbs',
+//   hbsEngine({
+//     layoutsDir: `${__dirname}/views/layouts`,
+//     extname: 'hbs',
+//     defaultLayout: 'base',
+//     partialsDir: `${__dirname}/views/partials/`,
+//   })
+// )
+
+app.use((req, res, next) => {
+  res.locals.ejsutils = viewUtils
+  res.locals._conf = {
+    MAX_UPLOAD_FILE_SIZE: conf.MAX_UPLOAD_FILE_SIZE,
+  }
+  next()
+})
 // ______________________________ logging ______________________________
 
 app.use(morgan('dev'))
@@ -68,7 +89,7 @@ app.use((req, res, next) => {
   return next()
 })
 
-// ______________________________ read forms body ______________________________
+// ______________________________ read form body ______________________________
 
 app.use(express.urlencoded({ extended: false }))
 
@@ -86,9 +107,7 @@ app.use((req, res, next) => {
 
     const messages = {}
 
-    Object.values(conf.FLASH_MSG_TYPE).forEach(type => {
-      const msgs = req.flash(type)
-
+    Object.entries(req.flash()).forEach(([type, msgs]) => {
       if (msgs.length) messages[type] = msgs
     })
 
@@ -110,21 +129,7 @@ app.use((req, res, next) => {
   return next()
 })
 
-// ______________________________ csrf ______________________________
-
-app.use(
-  csrf({
-    cookie: {
-      key: conf.CSRF_COOKIE_NAME,
-      sameSite: conf.CSRF_COOKIE_TYPE,
-      signed: conf.PRODUCTION_ENV,
-      secure: conf.PRODUCTION_ENV,
-      httpOnly: conf.PRODUCTION_ENV,
-      maxAge: conf.CSRF_TOKEN_MAX_AGE,
-    },
-    value: req => req.headers['x-csrf-token'] ?? (req.body && req.body['csrf-token']),
-  })
-)
+// ______________________________ res.csrf ______________________________
 
 app.use((req, res, next) => {
   let csrf = null
@@ -136,24 +141,39 @@ app.use((req, res, next) => {
   next()
 })
 
-// ______________________________ serve public ______________________________
+// ______________________________ routes ______________________________
+app.use('/', homeRoute)
+app.use('/categories', categoryRoute)
+app.use('/extensions', extensionRoute)
+
+// ______________________________ csrf protect ______________________________
+
+app.use(csrfProtect)
+
+// ______________________________ serve public/uploads ______________________________
 
 app.use('/static', express.static('public'))
-
-// ______________________________ routes ______________________________
-
-app.get('/', (req, res) => {
-  res.render('index')
-})
+app.use(conf.UPLOADS_URL, express.static('uploads'))
 
 // ______________________________ errors ______________________________
+app.use((req, res, next) => next(httpError(404)))
 
 app.use((err, req, res, next) => {
-  res.locals.serverError = conf.DEVELOPMENT_ENV ? err : { message: err.message }
-
   if (res.headersSent) return next(err)
 
-  res.status(err.status || 500).render('error')
+  if (conf.DEVELOPMENT_ENV) {
+    return res.status(err.status || 500).render('error', { serverError: err })
+  }
+
+  if (httpError.isHttpError(err))
+    return res.status(err.status).render('error', {
+      serverError: {
+        status: err.status,
+        message: httpError(err.status).message,
+      },
+    })
+
+  res.status(500).render('error', { serverError: { status: 500, messages: '5 0 0' } })
 })
 
 // ______________________________  ______________________________

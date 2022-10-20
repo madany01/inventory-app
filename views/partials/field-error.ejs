@@ -1,0 +1,7 @@
+<% if (locals.errors?.[field]?.length) { %>
+  <ul class="errors">
+    <% errors[field].forEach(errorDetails => { %>
+      <li class="error"><%= errorDetails.msg %></li>
+    <% }) %>
+  </ul>
+<% } %>

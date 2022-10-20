@@ -1,0 +1,35 @@
+<div class="delete-confirmation-page">
+  <section class="delete-confirmation-section">
+    <div class="ctr">
+      <h2 class="section-header">Delete confirmation</h2>
+
+      <form method="post">
+        <%- include('./csrf') %>
+        <p class="confirmation">
+          <span>Are you sure you want to delete</span>
+          <span class="deleted-item">
+            <%= locals.deletedItemName || 'this item' %>
+          </span>
+        </p>
+        <div class="input-lbl-err-ctr">
+          <label for="adminPasswordInput">admin password</label>
+          <input
+            type="password"
+            name="password"
+            id="adminPasswordInput"
+            class="<%= locals.errors?.['password'] && 'invalid' %>"
+            required
+          />
+          <%- include ('./field-error', {field: 'password'}) %>
+        </div>
+
+        <div class="action-btns">
+          <a href="<%= locals.cancelUrl || '../' %>" class="btn btn-lg btn-secondary">
+            cancel
+          </a>
+          <button class="btn-lg btn-danger" type="submit">yes, delete</button>
+        </div>
+      </form>
+    </div>
+  </section>
+</div>

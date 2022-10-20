@@ -1,0 +1,47 @@
+.flash-msgs {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-top: -6rem;
+  margin-bottom: 2.4rem;
+
+  .flash-msg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.2rem 1.6rem;
+    font-size: 1.8rem;
+    text-align: center;
+    border-radius: 0.8rem;
+
+    .close-flash {
+      margin-inline-start: auto;
+      background-color: transparent;
+      font-size: 1.6rem;
+    }
+
+    &.success {
+      $color: $color-teal;
+      background-color: rgba($color, 0.2);
+      color: $color;
+    }
+
+    &.info {
+      $color: $color-primary;
+      background-color: rgba($color, 0.1);
+      color: $color;
+    }
+
+    &.error {
+      $color: $color-tomato;
+      background-color: rgba($color, 0.2);
+      color: $color;
+    }
+
+    &.warning {
+      $color: $color-orange;
+      background-color: rgba($color, 0.2);
+      color: $color;
+    }
+  }
+}

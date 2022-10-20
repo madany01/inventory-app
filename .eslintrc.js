@@ -16,5 +16,9 @@ module.exports = {
     'no-use-before-define': ['error', { functions: false }],
     'consistent-return': 'off',
     'no-shadow': 'off',
+    camelcase: 'off',
+    'no-multi-assign': ['error', { ignoreNonDeclaration: true }],
+    strict: 'off',
+    'lines-between-class-members': 'off',
   },
 }

@@ -1,0 +1,192 @@
+categories:
+  - name: linters
+  - name: themes
+  - name: formatters
+  - name: utils
+  - name: debuggers
+  - name: programming languages
+
+extensions:
+  # programming languages
+  - name: Python
+    category: programming languages
+    stars: 4.4
+    downloads: 67477713
+    description: >-
+      A Visual Studio Code extension with rich support for the Python
+      language (for all actively supported versions of the language: >=3.7),
+      including features such as IntelliSense (Pylance), linting, debugging,
+      code navigation, code formatting, refactoring, variable explorer, test
+      explorer, and more!
+    fileName: python-prog
+
+  - name: JavaScript and TypeScript Nightly
+    category: programming languages
+    stars: 4.2
+    downloads: 1662861
+    description: >-
+      VS Code extension that enables the nightly build of TypeScript
+      (typescript@next) as VS Code's built-in TypeScript version used to power
+      JavaScript and TypeScript IntelliSense
+    fileName: js-ts
+
+  - name: C/C++
+    category: programming languages
+    stars: 3.5
+    downloads: 37558014
+    description: The C/C++ extension adds language support for C/C++ to Visual Studio Code, including editing (IntelliSense) and debugging features
+    fileName: cpp
+
+  # themes
+  - name: One Dark Pro
+    category: themes
+    stars: 4.6
+    downloads: 6245383
+    description: Atom's iconic One Dark theme, and one of the most installed themes for VS Code!
+    fileName: one-dark-pro
+
+  - name: Dracula Official
+    category: themes
+    stars: 4.99
+    downloads: 4410359
+    description: Official Dracula Theme. A dark theme for many editors, shells, and more.
+    fileName: dracula
+
+  - name: Night Owl
+    category: themes
+    stars: 5
+    downloads: 1644826
+    description: >-
+      A VS Code theme for the night owls out there. Now introducing Light
+      Owl theme for daytime usage. Decisions were based on meaningful contrast
+      for reading comprehension and for optimal razzle dazzle. ✨
+    fileName: night-owl
+
+  - name: Halcyon Theme
+    category: themes
+    stars: 4.55
+    downloads: 100000
+    description: A dark blue theme for VS Code based on the Ayu Mirage theme
+    fileName: halcyon
+
+  - name: SynthWave '84
+    category: themes
+    stars: 4.88
+    downloads: 1070679
+    description: >-
+      Do you remember that endless summer back in '84? Cruising down the
+      ocean-highway with the top down, the wind in our hair and heads buzzing
+      with neon dreams?
+
+      No, I don't remember it either, but with this experimental theme we can go there
+    fileName: synth-wave
+
+  # linters
+
+  - name: ESLint
+    category: linters
+    stars: 4.5
+    downloads: 22799378
+    description: >-
+      Integrates ESLint into VS Code. If you are new to ESLint check the
+      documentation.
+
+      The extension uses the ESLint library installed in the opened workspace folder. If the folder doesn't provide one the extension looks for a global install version. If you haven't installed ESLint either locally or globally do so by running npm install eslint in the workspace folder for a local install or npm install -g eslint for a global install.
+
+      On new folders you might also need to create a .eslintrc configuration file. You can do this by either using the VS Code command Create ESLint configuration or by running the eslint command in a terminal. If you have installed ESLint globally (see above) then run eslint --init in a terminal. If you have installed ESLint locally then run .
+
+      ode_modules.bineslint --init under Windows and ./node_modules/.bin/eslint --init under Linux and Mac.
+    fileName: eslint
+
+  # formatters
+
+  - name: Prettier - Code formatter
+    category: formatters
+    stars: 3.4
+    downloads: 25515816
+    description: >-
+      Prettier Formatter for Visual Studio Code
+      Prettier is an opinionated code formatter. It enforces a consistent style by parsing your code and re-printing it with its own rules that take the maximum line length into account, wrapping code when necessary.
+
+      JavaScript · TypeScript · Flow · JSX · JSON
+      CSS · SCSS · Less
+      HTML · Vue · Angular HANDLEBARS · Ember · Glimmer
+      GraphQL · Markdown · YAML
+      Your favorite language?
+
+    fileName: prettier
+
+  - name: YAML
+    category: formatters
+    stars: 3.3
+    downloads: 9705317
+    description: Provides comprehensive YAML Language support to Visual Studio Code, via the yaml-language-server, with built-in Kubernetes syntax support.
+    fileName: yaml
+
+  - name: Python Indent
+    category: formatters
+    stars: 4.2
+    downloads: 3109223
+    description:
+      Every time you press the Enter key in a Python context, this extension will parse your Python file up to the location of your cursor, and determine exactly how much the next line (or two in the case of hanging indents) should be indented and how much nearby lines should be un-indented.
+
+      There are three main cases when determining the correct indentation, described below.
+    fileName: py-indent
+
+  - name: sass
+    category: formatters
+    stars: 4.2
+    downloads: 1529464
+    description: Indented Sass syntax Highlighting, Autocomplete & Formatter
+    fileName: sass
+
+  # debuggers
+
+  - name: JavaScript Debugger (Nightly)
+    category: debuggers
+    stars: 4
+    downloads: 800000
+    description: This is a DAP-based JavaScript debugger. It debugs Node.js, Chrome, Edge, WebView2, VS Code extensions, and more. It has been the default JavaScript debugger in Visual Studio Code since 1.46, and is gradually rolling out in Visual Studio proper.
+    fileName: js-debugger
+
+  # utils
+
+  - name: Git Graph
+    category: utils
+    stars: 4.9
+    downloads: 3567853
+    description: View a Git Graph of your repository, and perform Git actions from the graph.
+    fileName: git-graph
+
+  - name: GitLens — Git supercharged
+    category: utils
+    stars: 4
+    downloads: 17946122
+    description: Supercharge Git within VS Code — Visualize code authorship at a glance via Git blame annotations and CodeLens, seamlessly navigate and explore Git repositories, gain valuable insights via rich visualizations and powerful comparison commands, and so much more
+    fileName: git-lens
+
+  - name: Live Server
+    category: utils
+    stars: 4.5
+    downloads: 26858445
+    description: Launch a development local Server with live reload feature for static & dynamic pages
+    fileName: live-server
+
+  - name: MongoDB for VS Code
+    category: utils
+    stars: 4
+    downloads: 533278
+    description: Connect to MongoDB and Atlas directly from your VS Code environment, navigate your databases and collections, inspect your schema and use playgrounds to prototype queries and aggregations.
+    fileName: vs-mongo
+
+  - name: Todo Tree
+    category: utils
+    stars: 5
+    downloads: 2328473
+    description: >-
+      This extension quickly searches (using ripgrep) your workspace for comment tags like TODO and FIXME, and displays them in a tree view in the activity bar. The view can be dragged out of the activity bar into the explorer pane (or anywhere else you would prefer it to be).
+
+      Clicking a TODO within the tree will open the file and put the cursor on the line containing the TODO.
+
+      Found TODOs can also be highlighted in open files.
+    fileName: todo-tree

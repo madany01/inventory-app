@@ -1,0 +1,15 @@
+<% if (locals.hasMessages()) { %>
+
+  <div class="ctr no-bg">
+    <ul class="flash-msgs">
+      <% Object.entries(locals.getMessages()).forEach(([type, msgs]) => { %>
+        <% msgs.forEach(msg => { %>
+          <li class="flash-msg <%= type %>">
+            <span><%= msg %></span>
+            <button class="close-flash">❌</button>
+          </li>
+        <% }) %>
+      <% }) %>
+    </ul>
+  </div>
+<% } %>

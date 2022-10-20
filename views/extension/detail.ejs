@@ -1,0 +1,18 @@
+<div class="extension-detail-page">
+  <section class="extension-detail-section">
+    <div class="ctr">
+      <h2 class="section-header">Extension details</h2>
+      <%- include('../partials/extension-card-detail') %>
+      <div class="actions-btns">
+        <a href="<%= `${extension.url}/update` %>" class="btn btn-md btn-warning">
+          <span class="material-symbols-outlined">edit</span>
+          <span>edit extension</span>
+        </a>
+        <a href="<%= `${extension.url}/delete` %>" class="btn btn-md btn-danger">
+          <span class="material-symbols-outlined">delete</span>
+          <span>delete extension</span>
+        </a>
+      </div>
+    </div>
+  </section>
+</div>

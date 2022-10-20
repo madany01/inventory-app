@@ -1,0 +1,9 @@
+<% if (!extensions.length) { %>
+    <p class="empty-list">There are no extensions</p>
+  <% } else {%>
+    <ul class="extension-list">
+      <% extensions.forEach(extension => { %>
+        <%- include('../partials/extension-card-preview', { extension })  %>
+      <% }) %>
+    </ul>
+<% } %>

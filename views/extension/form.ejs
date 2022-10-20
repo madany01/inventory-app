@@ -1,0 +1,118 @@
+<div class="extension-form-page">
+  <section class="extension-form-section">
+    <div class="ctr">
+      <h2 class="section-header"><%= locals.mode || 'create' %> extension</h2>
+
+      <form method="post" enctype="multipart/form-data">
+        <%- include ('../partials/csrf') %>
+
+        <div class="input-lbl-err-ctr">
+          <label for="extensionNameInput">name</label>
+          <input
+            type="text"
+            name="name"
+            id="extensionNameInput"
+            placeholder="python"
+            class="<%= locals.errors?.name && 'invalid' %>"
+            value="<%= ejsutils.oneOf(locals, ['fields', 'extension'], 'name') %>"
+            required
+          />
+          <%- include ('../partials/field-error', {field: 'name'}) %>
+        </div>
+
+        <div class="input-lbl-err-ctr">
+          <label for="categoryInput">category</label>
+          <select name="category" id="categoryInput" class="<%= locals.errors?.category && 'invalid' %>" required>
+            <% const selectedCategoryId = locals.fields?.category || locals.extension?.category.id.toString('hex')  %>
+            <option value="" <%= !selectedCategoryId && 'selected' || null %> >
+              choose a category
+            </option>
+            <% categories.forEach(cat => { %>
+              <option value="<%= cat.id %>" <%= cat.id.toString('hex') === selectedCategoryId && 'selected' || null %> >
+                <%= cat.name %>
+              </option>
+            <% }) %>
+          </select>
+          <%- include ('../partials/field-error', {field: 'category'}) %>
+        </div>
+
+        <div class="input-lbl-err-ctr">
+          <label for="numOfDownloadsInput">number of downloads</label>
+          <input
+            type="number"
+            min="0"
+            name="downloads"
+            id="numOfDownloadsInput"
+            placeholder="250000"
+            class="<%= locals.errors?.downloads && 'invalid' %>"
+            value="<%= ejsutils.oneOf(locals, ['fields', 'extension'], 'downloads') %>"
+            required
+          />
+          <%- include ('../partials/field-error', {field: 'downloads'}) %>
+        </div>
+
+        <div class="input-lbl-err-ctr">
+          <label for="ratingInput">rating</label>
+          <input
+            type="number"
+            min="0"
+            step="0.001"
+            max="5"
+            name="stars"
+            id="ratingInput"
+            placeholder="4.8"
+            class="<%= locals.errors?.stars && 'invalid' %>"
+            value="<%= ejsutils.oneOf(locals, ['fields', 'extension'], 'stars') %>"
+            required
+          />
+          <%- include ('../partials/field-error', {field: 'stars'}) %>
+        </div>
+
+        <div class="input-lbl-err-ctr">
+          <label for="descriptionInput">description</label>
+          <textarea
+            name="description"
+            id="descriptionInput"
+            placeholder="A Visual Studio Code extension with rich support for the Python language (for all actively supported versions of the language: >=3.7), including features such as IntelliSense (Pylance), linting, debugging, code navigation, code formatting, refactoring, variable explorer, test explorer, and more!"
+            class="<%= locals.errors?.description && 'invalid' %>"
+            required
+          ><%= ejsutils.oneOf(locals, ['fields', 'extension'], 'description') %></textarea>
+          <%- include ('../partials/field-error', {field: 'description'}) %>
+        </div>
+
+        <div class="input-lbl-err-ctr with-img">
+          <label for="imgInput">image</label>
+          <input
+            type="file"
+            data-max-size="<%= _conf.MAX_UPLOAD_FILE_SIZE %>"
+            accept=".jpg, .jpeg, .png"
+            name="image"
+            id="imgInput"
+            class="<%= locals.errors?.image?.length && 'invalid' %>"
+          />
+          <p class="input-description">🔹 max allowed file size is <%= _conf.MAX_UPLOAD_FILE_SIZE/1024 %> KB</p>
+          <%- include ('../partials/field-error', {field: 'image'}) %>
+          <% if (locals.extension?.imgUrl) { %>
+            <div class="input-img-description">
+              <a href="<%= extension.imgUrl %>">
+                  <img src="<%= extension.imgUrl %>" alt="">
+              </a>
+            </div>
+          <% } %>
+        </div>
+
+        <% if (locals.mode === 'update') { %>
+          <div class="input-lbl-err-ctr">
+            <label for="adminPasswordInput">admin password</label>
+            <input type="password" name="password" id="adminPasswordInput" class="<%= locals.errors?.password && 'invalid' %>" required/>
+            <%- include ('../partials/field-error', {field: 'password'}) %>
+          </div>
+        <% } %>
+        <div class="action-btns">
+          <a href="<%= locals.extension?.url || '/extensions' %>" class="btn btn-lg btn-secondary">cancel</a>
+          <button class="btn-lg btn-primary" type="submit"><%= locals.mode || 'create' %></button>
+        </div>
+      </form>
+    </div>
+  </section>
+</div>

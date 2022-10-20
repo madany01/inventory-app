@@ -1,0 +1,25 @@
+<div class="category-page">
+  <section class="categories-section">
+    <div class="ctr">
+      <% if (!categories.length) { %>
+          <p class="empty-list">There are no categories</p>
+      <% } else { %>
+        <h2 class="section-header">all categories</h2>
+
+        <ul class="category-list">
+          <% categories.forEach(category => { %>
+            <li class="category-record">
+              <a href="<%= category.url %>" class="category"><%= category.name %></a>
+              <a href="<%= `${category.url}/update` %>" class="edit-category">
+                <span class="material-symbols-outlined">edit</span>
+              </a>
+              <a href="<%= `${category.url}/delete` %>" class="delete-category">
+                <span class="material-symbols-outlined">delete</span>
+              </a>
+            </li>
+          <% }) %>
+        </ul>
+      <% } %>
+    </div>
+  </section>
+</div>

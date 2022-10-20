@@ -1,0 +1,11 @@
+<div class="stars">
+  <% ejsutils.starsAsList(extension.stars).forEach(star => { %>
+    <% if (star === 'full') { %>
+      <span class="material-symbols-outlined star-icon filled">star_rate</span>
+    <% } else if(star === 'half') { %>
+      <span class="material-symbols-outlined star-icon filled">star_rate_half</span>
+    <% } else {%>
+      <span class="material-symbols-outlined star-icon">star_rate</span>
+    <% } %>
+  <% }) %>
+</div>

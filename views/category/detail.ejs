@@ -1,0 +1,19 @@
+<div class="category-detail-page">
+  <section class="category-detail-section">
+    <div class="ctr">
+      <h2 class="section-header"><%= category.name %>&apos; category</h2>
+      <div class="actions-btns">
+        <a href="<%= `${category.url}/update` %>" class="btn btn-md btn-warning">
+          <span class="material-symbols-outlined">edit</span>
+          <span>edit category</span>
+        </a>
+        <a href="<%= `${category.url}/delete` %>" class="btn btn-md btn-danger">
+          <span class="material-symbols-outlined">delete</span>
+          <span>delete category</span>
+        </a>
+      </div>
+      <hr>
+      <%- include('../partials/extension-preview-list') %>
+    </div>
+  </section>
+</div>

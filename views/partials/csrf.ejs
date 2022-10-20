@@ -1,0 +1,3 @@
+<% if (locals.getCSRF) { %>
+  <input type="hidden" name="csrf-token" value="<%= getCSRF() %>" />
+<% } %>

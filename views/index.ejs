@@ -1,0 +1,34 @@
+<div class="home-page">
+  <section class="popular-extensions-section">
+    <div class="ctr">
+      <h2 class="section-header">popular extensions</h2>
+      <%- include('./partials/extension-preview-list')  %>
+      <% if (extensions.length) { %>
+        <a href="/extensions" class="btn btn-md btn-info view-all-extensions">
+          view all extensions
+        </a>
+      <% }%>
+    </div>
+  </section>
+
+  <section class="popular-categories-section">
+    <div class="ctr">
+      <h2 class="section-header">Filter by category</h2>
+
+      <% if (!categories.length) { %>
+        <p class="empty-list">There are no categories</p>
+      <% } else {%>
+        <ul class="category-list">
+          <% categories.forEach(cat => { %>
+            <li>
+              <a href="<%= cat.url %>" class="btn category"><%= cat.name %></a>
+            </li>
+          <% }) %>
+        </ul>
+        <a class="btn btn-md btn-info view-all-categories" href="/categories">
+          view all categories
+        </a>
+      <% } %>
+    </div>
+  </section>
+</div>

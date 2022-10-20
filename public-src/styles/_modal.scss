@@ -1,0 +1,66 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+
+  &.hidden {
+    pointer-events: none;
+    visibility: hidden;
+    opacity: 0;
+  }
+
+  transition: all 0.3s;
+
+  background-color: rgba($color: $color-black-1, $alpha: 0.33);
+}
+
+.msg-modal {
+  position: fixed;
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+
+  min-width: min(90%, 48rem);
+  transform: translate(-50%, -50%);
+
+  padding: 2.4rem;
+  backdrop-filter: blur(32px);
+  background-color: rgba($color-black-2, 0.2);
+  border: 1px solid rgba($color-tomato, 0.5);
+  border-radius: 1.2rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+
+  transition: all 0.3s;
+
+  &.hidden {
+    transform: translate(-50%, 0%);
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .msg-icon-ctr {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    color: $color-tomato;
+  }
+
+  .msg {
+    font-size: 1.6rem;
+  }
+
+  .close-modal {
+    align-self: end;
+    font-size: 1.6rem;
+    background-color: transparent;
+    color: $color-grey;
+    border: 1px solid currentColor;
+    padding: 0.8rem 2.4rem;
+    border-radius: 1.2rem;
+  }
+}
