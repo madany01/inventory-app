@@ -1,6 +1,6 @@
-const path = require('path')
-
 require('dotenv').config()
+
+const path = require('path')
 
 const PRODUCTION_ENV = process.env.NODE_ENV === 'production'
 const DEVELOPMENT_ENV = !PRODUCTION_ENV

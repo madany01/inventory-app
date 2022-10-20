@@ -5,6 +5,8 @@ const path = require('path')
 
 const log = require('debug')(`${conf.APP_NAME}:server`)
 const express = require('express')
+const helmet = require('helmet')
+const compression = require('compression')
 const httpError = require('http-errors')
 const morgan = require('morgan')
 const expressLayouts = require('express-ejs-layouts')
@@ -22,6 +24,11 @@ const { csrfProtect, sessionPopper, viewUtils } = require('./core')
 // ______________________________ app ______________________________
 
 const app = express()
+
+//  ______________________________ production security ______________________________
+
+app.use(helmet())
+app.use(compression())
 
 //  ______________________________ req.ctx ______________________________
 

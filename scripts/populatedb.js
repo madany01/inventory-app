@@ -62,17 +62,27 @@ async function copyImgsToUploadDir() {
 async function main() {
   console.time('⌛ executionTime')
 
+  const argv = new Set(process.argv.slice(2))
+
+  const opts = {
+    deleteUploads: argv.has('--delete-uploads'),
+    deleteDocs: argv.has('--delete-docs'),
+    copyImgs: argv.has('--copy-imgs'),
+  }
+
   const [data] = await Promise.all([
     yaml.parse((await fs.readFile(path.join(__dirname, './data.yaml'))).toString()),
     mongoose.connect(conf.MONGODB_URL, conf.MONGODB_OPTS),
-    deleteUploads(),
-    deleteExtensions(),
-    deleteCategories(),
+    ...(opts.deleteUploads ? [deleteUploads()] : []),
+    ...(opts.deleteDocs ? [deleteExtensions(), deleteCategories()] : []),
   ])
 
   await populateCategory(data.categories)
 
-  await Promise.all([populateExtensions(data.extensions), copyImgsToUploadDir()])
+  await Promise.all([
+    populateExtensions(data.extensions),
+    ...(opts.copyImgs ? [copyImgsToUploadDir()] : []),
+  ])
 
   console.log('------ categories ------')
   Object.values(categoriesDoc).forEach(console.log)
