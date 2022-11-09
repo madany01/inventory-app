@@ -70,7 +70,10 @@ router.post(
         mode: 'update',
         category,
         fields: fields.values,
-        errors: { ...fields.errors, password: [{ msg: 'invalid admin password' }] },
+        errors: {
+          ...fields.errors,
+          ...(!isAdmin && { password: [{ msg: 'invalid admin password' }] }),
+        },
       })
     }
 
