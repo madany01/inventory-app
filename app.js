@@ -70,6 +70,8 @@ app.use(morgan('dev'))
 
 // ______________________________ session ______________________________
 
+if (conf.PRODUCTION_ENV) app.set('trust proxy', 1)
+
 app.use(
   session({
     secret: conf.COOKIE_SIGN_KEY,
@@ -81,6 +83,7 @@ app.use(
       mongoOptions: conf.MONGODB_OPTS,
       collectionName: conf.SESSION_DB_NAME,
     }),
+    ...(conf.PRODUCTION_ENV && { proxy: true }),
     cookie: {
       maxAge: conf.SESSION_COOKIE_MAX_AGE,
       sameSite: conf.SESSION_COOKIE_TYPE,
