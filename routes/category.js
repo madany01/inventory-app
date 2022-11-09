@@ -83,7 +83,7 @@ router.post(
     category.name = fields.values.name
     await category.save()
 
-    req.flash(conf.FLASH_MSG_TYPE.SUCCESS, 'category update')
+    req.flash(conf.FLASH_MSG_TYPE.SUCCESS, 'category updated')
     res.redirect(`/categories/${category._id}`)
   }
 )
