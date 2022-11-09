@@ -1,3 +1,6 @@
+const path = require('path')
+const { unlink } = require('fs/promises')
+
 const express = require('express')
 
 const conf = require('../conf')
@@ -107,7 +110,15 @@ router.post(
       })
 
     await category.delete()
+    const extensions = await Extension.find({ category })
     await Extension.deleteMany({ category })
+
+    const filesNames = extensions
+      .filter(ext => ext.fileName)
+      .map(ext => path.join(conf.UPLOADS_FS_PATH, ext.fileName))
+
+    await Promise.all(filesNames.map(fn => unlink(fn)))
+
     req.flash(conf.FLASH_MSG_TYPE.SUCCESS, 'category deleted')
     res.redirect('/categories')
   }
